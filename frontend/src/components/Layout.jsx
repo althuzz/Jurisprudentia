@@ -107,19 +107,19 @@ const Layout = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200 overflow-hidden"
+                            className="md:hidden bg-white/80 backdrop-blur-xl border-b border-slate-200 overflow-hidden shadow-lg"
                         >
                             <div className="px-4 pt-2 pb-6 space-y-2">
-                                <Link to="/" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-                                <Link to="/quiz" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
-                                <Link to="/notes" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Legal Notes</Link>
-                                <Link to="/legal-ai" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Law AI</Link>
-                                <Link to="/leaderboard" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Leaderboard</Link>
-                                <Link to="/feedback" className="block px-4 py-3 rounded-lg text-white hover:bg-white/5 hover:text-neo-green border border-transparent hover:border-white/5 transition-all" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
+                                <Link to="/" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+                                <Link to="/quiz" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
+                                <Link to="/notes" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Legal Notes</Link>
+                                <Link to="/legal-ai" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Law AI</Link>
+                                <Link to="/leaderboard" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Leaderboard</Link>
+                                <Link to="/feedback" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent hover:border-blue-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
                                 {user ? (
                                     <button
                                         onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
-                                        className="w-full text-left px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all flex items-center gap-2"
+                                        className="w-full text-left px-4 py-3 rounded-lg text-slate-700 hover:bg-red-50 hover:text-red-600 border border-transparent hover:border-red-200 transition-all flex items-center gap-2 font-medium"
                                     >
                                         <LogOut size={18} /> Sign Out
                                     </button>
