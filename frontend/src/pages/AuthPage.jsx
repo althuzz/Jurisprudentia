@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, LogIn, UserPlus } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { API_URL } from '../config';
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -45,7 +47,7 @@ const AuthPage = () => {
 
         try {
             const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-            const response = await fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, {
+            const response = await fetch(`${API_URL}${endpoint}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(isLogin ? { email: formData.email, password: formData.password } : { username: formData.username, email: formData.email, password: formData.password })
@@ -70,32 +72,37 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto py-12">
-            <div className="card p-8">
-                <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-slate-900">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-md mx-auto py-16 relative"
+        >
+            <div className="bg-white p-10 rounded-3xl shadow-xl border border-slate-200 relative overflow-hidden">
+
+                <div className="text-center mb-10">
+                    <h2 className="text-3xl font-black text-slate-900 font-sans tracking-tight mb-2">
                         {isLogin ? 'Welcome Back' : 'Create Account'}
                     </h2>
-                    <p className="text-slate-500">
-                        {isLogin ? 'Sign in to seek justice' : 'Join the legal community'}
+                    <p className="text-slate-500 text-sm">
+                        {isLogin ? 'Sign in to access your dashboard' : 'Join the legal community today'}
                     </p>
                 </div>
 
                 {error && (
-                    <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2">
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-200 text-sm rounded-xl flex items-center gap-2 backdrop-blur-md">
                         <span className="font-bold">Error:</span> {error}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     {!isLogin && (
-                        <div className="space-y-1">
-                            <label className="text-sm font-semibold text-slate-700">Username</label>
+                        <div className="space-y-2">
+                            <label className="text-xs font-bold text-blue-600 uppercase tracking-wider">Username</label>
                             <div className="relative">
-                                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                                 <input
                                     name="username"
-                                    className="input-field pl-10"
+                                    className="w-full pl-12 pr-4 py-4 bg-white border border-slate-300 rounded-xl text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
                                     placeholder="Username"
                                     value={formData.username}
                                     onChange={handleChange}
@@ -104,14 +111,14 @@ const AuthPage = () => {
                         </div>
                     )}
 
-                    <div className="space-y-1">
-                        <label className="text-sm font-semibold text-slate-700">Email</label>
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-blue-600 uppercase tracking-wider">Email</label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                             <input
                                 name="email"
                                 type="email"
-                                className="input-field pl-10"
+                                className="w-full pl-12 pr-4 py-4 bg-white border border-slate-300 rounded-xl text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
                                 placeholder="email@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -119,14 +126,14 @@ const AuthPage = () => {
                         </div>
                     </div>
 
-                    <div className="space-y-1">
-                        <label className="text-sm font-semibold text-slate-700">Password</label>
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-blue-600 uppercase tracking-wider">Password</label>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                             <input
                                 name="password"
                                 type="password"
-                                className="input-field pl-10"
+                                className="w-full pl-12 pr-4 py-4 bg-white border border-slate-300 rounded-xl text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={handleChange}
@@ -135,14 +142,14 @@ const AuthPage = () => {
                     </div>
 
                     {!isLogin && (
-                        <div className="space-y-1">
-                            <label className="text-sm font-semibold text-slate-700">Confirm Password</label>
+                        <div className="space-y-2">
+                            <label className="text-xs font-bold text-blue-600 uppercase tracking-wider">Confirm Password</label>
                             <div className="relative">
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                                 <input
                                     name="confirmPassword"
                                     type="password"
-                                    className="input-field pl-10"
+                                    className="w-full pl-12 pr-4 py-4 bg-white border border-slate-300 rounded-xl text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
                                     placeholder="••••••••"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
@@ -151,26 +158,28 @@ const AuthPage = () => {
                         </div>
                     )}
 
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={loading}
-                        className="btn btn-primary w-full py-3 flex justify-center items-center gap-2 mt-6"
+                        className="w-full py-5 bg-blue-600 text-white font-bold rounded-xl shadow-md hover:bg-blue-700 transition-all flex justify-center items-center gap-2 mt-8 text-lg"
                     >
-                        {loading ? 'Processing...' : (isLogin ? <><LogIn size={18} /> Sign In</> : <><UserPlus size={18} /> Register</>)}
-                    </button>
+                        {loading ? <span className="animate-pulse">Processing...</span> : (isLogin ? <><LogIn size={20} /> Sign In</> : <><UserPlus size={20} /> Register</>)}
+                    </motion.button>
                 </form>
 
-                <div className="mt-6 text-center text-sm text-slate-500">
+                <div className="mt-8 text-center text-sm text-slate-500">
                     {isLogin ? "Don't have an account? " : "Already have an account? "}
                     <button
                         onClick={() => setIsLogin(!isLogin)}
-                        className="text-blue-600 font-bold hover:underline"
+                        className="text-blue-600 font-bold hover:text-blue-700 transition-colors border-b border-blue-600/20 hover:border-blue-600 pb-0.5 ml-1"
                     >
                         {isLogin ? 'Sign up' : 'Log in'}
                     </button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

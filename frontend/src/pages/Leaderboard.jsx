@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Trophy, Crown, Medal } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { API_URL } from '../config';
 
 const Leaderboard = () => {
     const [leaderboardData, setLeaderboardData] = useState([]);
@@ -8,7 +10,7 @@ const Leaderboard = () => {
     useEffect(() => {
         const fetchLeaderboard = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/leaderboard`);
+                const response = await fetch(`${API_URL}/api/leaderboard`);
                 const data = await response.json();
                 setLeaderboardData(data);
                 setLoading(false);
@@ -21,53 +23,67 @@ const Leaderboard = () => {
     }, []);
 
     const getRankIcon = (index) => {
-        if (index === 0) return <Crown className="text-yellow-500" size={24} fill="currentColor" />;
-        if (index === 1) return <Medal className="text-slate-400" size={24} />;
-        if (index === 2) return <Medal className="text-amber-700" size={24} />;
+        if (index === 0) return <Crown className="text-yellow-500 drop-shadow-sm" size={28} fill="currentColor" />;
+        if (index === 1) return <Medal className="text-slate-400" size={28} />;
+        if (index === 2) return <Medal className="text-orange-400" size={28} />;
         return <span className="text-slate-400 font-bold w-6 text-center">#{index + 1}</span>;
     };
 
-    if (loading) return <div className="text-center py-20">Loading rankings...</div>;
+    if (loading) return <div className="text-center py-20 text-blue-600 animate-pulse uppercase tracking-widest text-sm">Loading rankings...</div>;
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-10">
-                <Trophy className="mx-auto text-yellow-500 mb-4" size={48} />
-                <h1 className="text-3xl font-bold mb-2">Legal Leaderboard</h1>
-                <p className="text-slate-500">Top legal minds of the week</p>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="max-w-3xl mx-auto"
+        >
+            <div className="text-center mb-12 relative">
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                >
+                    <Trophy className="mx-auto text-blue-600 mb-6 drop-shadow-sm" size={56} />
+                </motion.div>
+                <h1 className="text-5xl font-sans font-black mb-3 text-slate-900 tracking-tight">Legal <span className="text-blue-600">Classroom</span> Rankings</h1>
+                <p className="text-slate-500 text-lg font-light">Top legal minds of the week</p>
             </div>
 
-            <div className="card divide-y divide-slate-100">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-200">
                 {leaderboardData.map((user, index) => (
-                    <div
+                    <motion.div
                         key={index}
-                        className={`p-4 flex items-center justify-between hover:bg-slate-50 transition-colors ${index === 0 ? 'bg-yellow-50/50' : ''
-                            }`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className={`p-6 flex items-center justify-between transition-all duration-300 border-b border-slate-100 last:border-0 relative overflow-hidden group hover:bg-slate-50 ${index === 0 ? 'bg-yellow-50/50' : ''}`}
                     >
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 flex justify-center">
+                        {index === 0 && <div className="absolute left-0 top-0 h-full w-1 bg-yellow-400" />}
+
+                        <div className="flex items-center gap-6 relative z-10">
+                            <div className={`w-12 h-12 flex justify-center items-center rounded-xl bg-white border border-slate-200 ${index === 0 ? 'shadow-sm' : ''}`}>
                                 {getRankIcon(index)}
                             </div>
                             <div>
-                                <div className="font-bold text-slate-900">{user.username || user.name}</div>
-                                <div className="text-xs text-slate-500">Rank: {user.rank || index + 1}</div>
+                                <div className="font-bold text-slate-800 font-sans text-lg group-hover:text-blue-600 transition-colors">{user.username || user.name}</div>
+                                <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Rank: {user.rank || index + 1}</div>
                             </div>
                         </div>
 
-                        <div className="text-right">
-                            <div className="font-bold text-blue-600">{user.score} pts</div>
+                        <div className="text-right relative z-10">
+                            <div className="font-black text-2xl text-blue-600 drop-shadow-sm">{user.score} <span className="text-xs text-slate-400 font-normal align-middle">pts</span></div>
                             <div className="text-xs text-slate-400">{user.date}</div>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
 
                 {leaderboardData.length === 0 && (
-                    <div className="p-8 text-center text-slate-500">
-                        No scores recorded yet. Be the first!
+                    <div className="p-12 text-center text-slate-400 italic">
+                        No scores recorded yet. Be the first to conquer the leaderboard!
                     </div>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 };
 

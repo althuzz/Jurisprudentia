@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { API_URL } from '../config';
 
 const Feedback = () => {
     const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ const Feedback = () => {
         setStatus('submitting');
 
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/feedback`, {
+            const res = await fetch(`${API_URL}/api/feedback`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -39,48 +41,57 @@ const Feedback = () => {
 
     if (status === 'success') {
         return (
-            <div className="max-w-lg mx-auto py-20 text-center">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
-                    <CheckCircle size={40} />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="max-w-lg mx-auto py-24 text-center relative"
+            >
+                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 text-green-600">
+                    <CheckCircle size={48} />
                 </div>
-                <h2 className="text-3xl font-bold mb-4">Message Sent!</h2>
-                <p className="text-slate-600 mb-8">Thank you for your feedback. We'll get back to you shortly.</p>
-                <button className="btn btn-primary" onClick={() => setStatus('idle')}>
+                <h2 className="text-4xl font-bold mb-4 font-sans text-slate-900 tracking-tight">Message Sent!</h2>
+                <p className="text-slate-500 mb-10 text-lg">Thank you for your feedback. We'll get back to you shortly.</p>
+                <button className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-md" onClick={() => setStatus('idle')}>
                     Send Another Message
                 </button>
-            </div>
+            </motion.div>
         );
     }
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl font-bold mb-3">Contact & Support</h1>
-                <p className="text-slate-500">Have a question or suggestion? We'd love to hear from you.</p>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl mx-auto"
+        >
+            <div className="text-center mb-12 relative">
+                <h1 className="text-5xl font-sans font-black mb-4 text-slate-900 tracking-tight">Contact & <span className="text-blue-600">Support</span></h1>
+                <p className="text-slate-500 text-lg font-light">Have a question or suggestion? We'd love to hear from you.</p>
             </div>
 
-            <div className="card p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-200 relative overflow-hidden">
+                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                     <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Name</label>
+                            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Name</label>
                             <input
                                 type="text"
                                 name="name"
                                 required
-                                className="input-field"
+                                className="w-full p-4 rounded-xl bg-white border border-slate-300 text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400"
                                 placeholder="John Doe"
                                 value={formData.name}
                                 onChange={handleChange}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Email</label>
                             <input
                                 type="email"
                                 name="email"
                                 required
-                                className="input-field"
+                                className="w-full p-4 rounded-xl bg-white border border-slate-300 text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400"
                                 placeholder="john@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -89,49 +100,56 @@ const Feedback = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">Category</label>
-                        <select
-                            name="category"
-                            className="input-field cursor-pointer"
-                            value={formData.category}
-                            onChange={handleChange}
-                        >
-                            <option>General Query</option>
-                            <option>Report a Bug</option>
-                            <option>Content Suggestion</option>
-                            <option>Legal Question</option>
-                        </select>
+                        <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Category</label>
+                        <div className="relative">
+                            <select
+                                name="category"
+                                className="w-full p-4 rounded-xl bg-white border border-slate-300 text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all cursor-pointer appearance-none"
+                                value={formData.category}
+                                onChange={handleChange}
+                            >
+                                <option>General Query</option>
+                                <option>Report a Bug</option>
+                                <option>Content Suggestion</option>
+                                <option>Legal Question</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neo-text">
+                                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                            </div>
+                        </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+                        <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Message</label>
                         <textarea
                             name="message"
                             required
                             rows="5"
-                            className="input-field resize-none"
+                            className="w-full p-4 rounded-xl bg-white border border-slate-300 text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none placeholder:text-slate-400"
                             placeholder="How can we help you?"
                             value={formData.message}
                             onChange={handleChange}
                         ></textarea>
                     </div>
 
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         type="submit"
                         disabled={status === 'submitting'}
-                        className="btn btn-primary w-full py-3 flex items-center justify-center gap-2"
+                        className="w-full py-5 bg-blue-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 group"
                     >
                         {status === 'submitting' ? (
-                            'Sending...'
+                            <span className="animate-pulse">Sending...</span>
                         ) : (
                             <>
-                                <Send size={18} /> Send Message
+                                <Send size={20} className="group-hover:translate-x-1 transition-transform" /> Send Message
                             </>
                         )}
-                    </button>
+                    </motion.button>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

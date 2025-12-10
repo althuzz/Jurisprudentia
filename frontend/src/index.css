@@ -1,49 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-800 font-sans antialiased;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-900 font-bold;
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
   }
 }
 
 @layer components {
-  .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
-  }
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 shadow-md hover:shadow-lg;
+    @apply bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-sm;
   }
-  .btn-secondary {
-    @apply bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 focus:ring-slate-200;
-  }
-  .btn-accent {
-    @apply bg-emerald-500 text-white hover:bg-emerald-600 focus:ring-emerald-400;
-  }
-  
+
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300;
-  }
-  
-  .input-field {
-    @apply w-full px-4 py-2 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all;
-  }
-
-  .container-custom {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Minimalist Animations */
-  .fade-in {
-    animation: fadeIn 0.4s ease-out;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    @apply bg-white rounded-xl shadow-sm border border-slate-200 p-6;
   }
 }
