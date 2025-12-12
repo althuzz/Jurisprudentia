@@ -38,65 +38,193 @@ const quizzes = [
     id: 1,
     title: 'Basic Law Quiz',
     questions: [
+      // Constitutional Law Questions
       {
         id: 1,
+        topic: 'constitutional',
         question: 'What year was the U.S. Constitution ratified?',
         options: ['1776', '1787', '1791', '1795'],
         correctAnswer: 1
       },
       {
         id: 2,
+        topic: 'constitutional',
         question: 'How many amendments are in the Bill of Rights?',
         options: ['5', '8', '10', '15'],
         correctAnswer: 2
       },
       {
         id: 3,
+        topic: 'constitutional',
         question: 'Which branch has the power to interpret laws?',
         options: ['Legislative', 'Executive', 'Judicial', 'Administrative'],
         correctAnswer: 2
       },
       {
         id: 4,
+        topic: 'jurisprudence',
         question: 'Who gave the definition "law is the command of the sovereign backed by sanction"?',
         options: ['H.L.A. Hart', 'John Austin', 'Lon Fuller', 'Ronald Dworkin'],
         correctAnswer: 1
       },
       {
         id: 5,
+        topic: 'constitutional',
         question: 'Who put forward the idea of a Constituent Assembly for India?',
         options: ['M.N. Roy', 'Jawaharlal Nehru', 'B.R. Ambedkar', 'Sardar Patel'],
         correctAnswer: 0
       },
       {
         id: 6,
+        topic: 'constitutional',
         question: 'Which amendment is known as the "Mini Constitution"?',
         options: ['42nd Amendment', '44th Amendment', '52nd Amendment', '61st Amendment'],
         correctAnswer: 0
       },
       {
         id: 7,
+        topic: 'constitutional',
         question: 'When was the 42nd Amendment enacted?',
         options: ['1975', '1976', '1977', '1978'],
         correctAnswer: 1
       },
       {
+        id: 24,
+        topic: 'constitutional',
+        question: 'Which of the following writs is issued for quashing an order that is already passed by a subordinate Court, tribunal or a quasi-judicial authority?',
+        options: ['Mandamus', 'Certiorari', 'Prohibition', 'Quo Warranto'],
+        correctAnswer: 1
+      },
+
+      // Criminal Law Questions
+      {
         id: 8,
+        topic: 'criminal',
         question: 'Who has the burden to prove the accused falls under a General Exception in the BNS?',
         options: ['Prosecution', 'Defence', 'Accused', 'Judge'],
         correctAnswer: 2
       },
       {
         id: 9,
+        topic: 'criminal',
         question: 'What is the general rule for a child under 7 years?',
         options: ['Can be guilty if mature', 'Can be guilty if under 12', 'Not criminally liable for any offense', 'Presumed to be guilty'],
         correctAnswer: 2
       },
       {
         id: 10,
+        topic: 'criminal',
         question: 'Under Section 23 of BNS, when is intoxication not a defense?',
         options: ['Voluntary intoxication', 'Intoxication caused by medication', 'Without the knowledge of the accused', 'When the intoxication was due to accident'],
         correctAnswer: 0
+      },
+      {
+        id: 23,
+        topic: 'criminal',
+        question: 'A man is defined by Section 10 of Indian Penal Code as a male human being of',
+        options: ['Any age', 'Above 18 years of age', 'Above 16 years of age', 'Above 21 years of age'],
+        correctAnswer: 0
+      },
+
+      // Contract Law Questions
+      {
+        id: 11,
+        topic: 'contract',
+        question: 'What is the essential element of a valid contract?',
+        options: ['Offer and Acceptance', 'Consideration', 'Intention to create legal relations', 'All of the above'],
+        correctAnswer: 3
+      },
+      {
+        id: 12,
+        topic: 'contract',
+        question: 'A contract entered into by a minor is:',
+        options: ['Void', 'Voidable', 'Valid', 'Illegal'],
+        correctAnswer: 0
+      },
+      {
+        id: 13,
+        topic: 'contract',
+        question: 'What is the doctrine of "Caveat Emptor"?',
+        options: ['Let the buyer beware', 'Let the seller beware', 'Let both parties beware', 'None of the above'],
+        correctAnswer: 0
+      },
+
+      // Property Law Questions
+      {
+        id: 14,
+        topic: 'property',
+        question: 'What is the Transfer of Property Act year?',
+        options: ['1872', '1882', '1892', '1902'],
+        correctAnswer: 1
+      },
+      {
+        id: 15,
+        topic: 'property',
+        question: 'What is the minimum age to transfer property?',
+        options: ['18 years', '21 years', 'No minimum age', '16 years'],
+        correctAnswer: 0
+      },
+      {
+        id: 16,
+        topic: 'property',
+        question: 'What is "Easement" in property law?',
+        options: ['Right to use another\'s property', 'Right to sell property', 'Right to lease property', 'Right to inherit property'],
+        correctAnswer: 0
+      },
+
+      // Family Law Questions
+      {
+        id: 17,
+        topic: 'family',
+        question: 'Under Hindu Marriage Act, what is the minimum age for marriage for a bride?',
+        options: ['16 years', '18 years', '21 years', '25 years'],
+        correctAnswer: 1
+      },
+      {
+        id: 18,
+        topic: 'family',
+        question: 'What is "Maintenance" in family law?',
+        options: ['Financial support', 'Property division', 'Child custody', 'Divorce proceedings'],
+        correctAnswer: 0
+      },
+      {
+        id: 19,
+        topic: 'family',
+        question: 'Under which act is adoption governed in India?',
+        options: ['Hindu Adoption and Maintenance Act', 'Guardians and Wards Act', 'Both A and B', 'None of the above'],
+        correctAnswer: 2
+      },
+
+      // Jurisprudence Questions
+      {
+        id: 20,
+        topic: 'jurisprudence',
+        question: '_________ observes, "law must be stable, yet it cannot stand still".',
+        options: ['Holland', 'Roscoe Pound', 'Salmond', 'Allen'],
+        correctAnswer: 1
+      },
+      {
+        id: 21,
+        topic: 'jurisprudence',
+        question: 'Who said that "customs are of the main triangles of the laws of England"?',
+        options: ['Sir Edward Coke', 'Sir Thomas Fleming', 'Sir William Hankford', 'Sir Robert Hyde'],
+        correctAnswer: 0
+      },
+      {
+        id: 22,
+        topic: 'jurisprudence',
+        question: 'The doctrine of prospective overruling was laid down by Justice Cardozo in',
+        options: ['Gerard v. Worth of Paris Ltd.', 'Northern Railway v. Sunburst Oil Refining Co.', 'Tiverton Estates Ltd. v. Wearwell Ltd.', 'Baba Narayan Lakras v. Saboosa'],
+        correctAnswer: 1
+      },
+
+      // Tort Law Questions
+      {
+        id: 25,
+        topic: 'tort',
+        question: '"Tort means a civil wrong which is not exclusively a breach of contract or breach of Trust." This definition is from which statute?',
+        options: ['The Specific Relief Act', 'The Limitation Act', 'The Indian Contract Act', 'None of the above'],
+        correctAnswer: 1
       }
     ]
   }
@@ -135,15 +263,21 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Get all questions
+// Get all questions (with optional topic filter)
 app.get('/api/questions', (req, res) => {
+  const { topic } = req.query;
   const allQuestions = quizzes.flatMap(quiz => quiz.questions);
-  res.json(allQuestions);
-});
 
-// Get all quizzes
-app.get('/api/quizzes', (req, res) => {
-  res.json(quizzes);
+  // Filter by topic if provided
+  if (topic && topic !== 'all') {
+    const filteredQuestions = allQuestions.filter(q => q.topic === topic);
+    console.log(`Filtering questions for topic: ${topic}, found: ${filteredQuestions.length} questions`);
+    return res.json(filteredQuestions);
+  }
+
+  // Return all questions
+  console.log(`Returning all questions: ${allQuestions.length} questions`);
+  res.json(allQuestions);
 });
 
 // Get specific quiz
