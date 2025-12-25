@@ -409,8 +409,8 @@ app.get('/api/notes', (req, res) => {
               { title: 'Law Of Contracts 1 - Anil K Nair', url: `${req.protocol}://${req.get('host')}/public/notes/Law Of Contracts 1-Anil K Nair.pdf` }
             ],
             previousQns: [
-              { title: '2023 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Contracts_PYQ_2023.pdf` },
-              { title: '2022 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Contracts_PYQ_2022.pdf` }
+              { title: '2023 Previous Year Paper - CP01', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- CP01.pdf` },
+              { title: '2022 Previous Year Paper - CP01', url: `${req.protocol}://${req.get('host')}/public/notes/2022 Previous Year Paper - CP01.pdf` }
             ]
           }
         },
@@ -419,7 +419,7 @@ app.get('/api/notes', (req, res) => {
           name: 'Law of Torts',
           resources: {
             notes: [{ title: 'Law of Torts - Anil K Nair', url: `${req.protocol}://${req.get('host')}/public/notes/Law of Torts -Anil K Nair.pdf` }],
-            previousQns: [{ title: '2023 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Torts_PYQ_2023.pdf` }]
+            previousQns: [{ title: '2023 Previous Year Paper - CP02', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- CP02.pdf` }]
           }
         },
         {
@@ -427,7 +427,7 @@ app.get('/api/notes', (req, res) => {
           name: 'Constitutional Law 1',
           resources: {
             notes: [{ title: 'Constitutional_Law_1.pdf', url: `${req.protocol}://${req.get('host')}/public/notes/Constitutional_Law_1.pdf` }],
-            previousQns: [{ title: '2023 Previous Year Paper', url: '#' }]
+            previousQns: [{ title: '2023 Previous Year Paper - CP03', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- CP03.pdf` }]
           }
         },
         {
@@ -435,7 +435,7 @@ app.get('/api/notes', (req, res) => {
           name: 'Family Law 1',
           resources: {
             notes: [{ title: 'Family Law 1 - Anil K Nair', url: `${req.protocol}://${req.get('host')}/public/notes/Family Law 1 -Anil K Nair.pdf` }],
-            previousQns: [{ title: '2023 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Family_Law_PYQ_2023.pdf` }]
+            previousQns: [{ title: '2023 Previous Year Paper - CP04', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- CP04.pdf` }]
           }
         },
         {
@@ -443,7 +443,7 @@ app.get('/api/notes', (req, res) => {
           name: 'Law of Crimes 1',
           resources: {
             notes: [{ title: 'BNS - Anil K Nair', url: `${req.protocol}://${req.get('host')}/public/notes/BNS ANIL K NAIR.pdf` }],
-            previousQns: [{ title: '2023 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Crimes_PYQ_2023.pdf` }]
+            previousQns: [{ title: '2023 Previous Year Paper - CP05', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- CP05.pdf` }]
           }
         },
         {
@@ -451,7 +451,7 @@ app.get('/api/notes', (req, res) => {
           name: 'Legal Language and Legal Writing',
           resources: {
             notes: [{ title: 'Legal Language & Legal Writing - Anil K Nair', url: `${req.protocol}://${req.get('host')}/public/notes/Legal Language & Legal Writing-Anil K Nair.pdf` }],
-            previousQns: [{ title: '2023 Previous Year Paper', url: `${req.protocol}://${req.get('host')}/public/notes/Legal_Lang_PYQ_2023.pdf` }]
+            previousQns: [{ title: '2023 Previous Year Paper - OP1', url: `${req.protocol}://${req.get('host')}/public/notes/2023 Previous Year Paper- OP01.pdf` }]
           }
         }
       ]
