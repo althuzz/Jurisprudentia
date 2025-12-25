@@ -10,6 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-producti
 
 const path = require('path');
 const mockLegalAI = require('./mock-legal-ai');
+const geminiService = require('./gemini-service');
 
 // Middleware
 app.use(cors());
@@ -200,26 +201,166 @@ const quizzes = [
       {
         id: 11,
         topic: 'contract',
+        question: 'Under Section 2(h) of the Indian Contract Act, how is a contract defined?',
+        options: ['An agreement between two or more persons.', 'A promise made in writing.', 'An agreement enforceable by law.', 'Any proposal that is accepted.'],
+        correctAnswer: 2
+      },
+      {
+        id: 12,
+        topic: 'contract',
+        question: 'Which two elements must be present to form an "Agreement"?',
+        options: ['Proposal (Offer) and Acceptance.', 'Consideration and Free Consent.', 'Legal intention and Capacity.', 'Enforceability and Writing.'],
+        correctAnswer: 0
+      },
+      {
+        id: 13,
+        topic: 'contract',
+        question: 'The landmark case of Balfour v. Balfour (1919) established that:',
+        options: ['Husbands must always pay maintenance to wives.', 'Social or domestic arrangements do not intend to create legal obligations.', 'Verbal contracts are void.', 'Acceptance must be communicated in writing.'],
+        correctAnswer: 1
+      },
+      {
+        id: 26,
+        topic: 'contract',
+        question: 'What does the Latin term consensus ad idem signify in contract law?',
+        options: ['A contract must have a lawful object.', 'The parties must agree on the same thing in the same sense.', 'Consideration must be paid in cash.', 'An agreement is void if it is against public policy.'],
+        correctAnswer: 1
+      },
+      {
+        id: 39,
+        topic: 'contract',
+        question: 'In Carlill v. Carbolic Smoke Ball Co. (1893), the advertisement was held to be:',
+        options: ['A specific offer to Mrs Carlill.', 'An invitation to treat (offer to chaffer).', 'A general offer to the public at large.', 'A counter-offer.'],
+        correctAnswer: 2
+      },
+      {
+        id: 40,
+        topic: 'contract',
+        question: 'What is the effect of a counter-offer on the original offer?',
+        options: ['It accepts the original offer with conditions.', 'It terminates the original offer.', 'It makes the original offer irrevocable.', 'It has no legal effect until accepted in writing.'],
+        correctAnswer: 1
+      },
+      {
+        id: 41,
+        topic: 'contract',
+        question: 'According to the "Postal Rule," communication of acceptance is complete against the proposer when:',
+        options: ['The proposer receives the letter.', 'The proposer reads the letter.', 'The letter is put in the course of transmission (posted).', 'The offeree signs the letter.'],
+        correctAnswer: 2
+      },
+      {
+        id: 42,
+        topic: 'contract',
+        question: 'In Harvey v. Facey, a telegram stating "Lowest price for Bumper Hall Pen is £900" was considered:',
+        options: ['A binding offer.', 'An invitation to make an offer.', 'A valid acceptance.', 'A specific offer.'],
+        correctAnswer: 1
+      },
+      {
+        id: 43,
+        topic: 'contract',
+        question: 'The ruling in Mohori Bibi v. Dharmadas Ghose established that a minor\'s agreement is:',
+        options: ['Voidable at the minor\'s option.', 'Valid if it is for the minor\'s benefit.', 'Void ab initio (void from the beginning).', 'Enforceable after the minor turns 18.'],
+        correctAnswer: 2
+      },
+      {
+        id: 44,
+        topic: 'contract',
+        question: 'Under Section 68, if a person supplies "necessaries" to a minor:',
+        options: ['The minor is personally liable to pay.', 'The minor\'s property is liable for reimbursement.', 'No recovery is possible because the agreement is void.', 'The minor\'s parents are always liable.'],
+        correctAnswer: 1
+      },
+      {
+        id: 45,
+        topic: 'contract',
+        question: 'In India, consideration for a promise may move from:',
+        options: ['Only the promisee.', 'Only the promisor.', 'The promisee or any other person.', 'Only a legal guardian.'],
+        correctAnswer: 2
+      },
+      {
+        id: 46,
+        topic: 'contract',
+        question: 'The "Peppercorn Theory" relates to the principle that:',
+        options: ['Consideration must be adequate in value.', 'Consideration need not be adequate, but must be of some value.', 'Contracts without written consideration are void.', 'Consideration must always be in cash.'],
+        correctAnswer: 1
+      },
+      {
+        id: 47,
+        topic: 'contract',
+        question: '"Coercion" under Section 15 involves:',
+        options: ['Dominating the will of a person in a fiduciary relationship.', 'Threatening to commit an act forbidden by the Indian Penal Code.', 'Making a false statement innocently.', 'Remaining silent when there is a duty to speak.'],
+        correctAnswer: 1
+      },
+      {
+        id: 48,
+        topic: 'contract',
+        question: 'A "Wagering Agreement" (betting) is legally:',
+        options: ['Valid and enforceable.', 'Void.', 'Voidable at the option of the loser.', 'Illegal and punishable by imprisonment in all states.'],
+        correctAnswer: 1
+      },
+      {
+        id: 49,
+        topic: 'contract',
+        question: 'The "Doctrine of Blue Pencil" allows a court to:',
+        options: ['Cancel a contract written in the wrong ink.', 'Sever and delete illegal parts of a contract while enforcing legal parts.', 'Rewrite the terms of a contract to make them fair.', 'Grant an injunction against a minor.'],
+        correctAnswer: 1
+      },
+      {
+        id: 50,
+        topic: 'contract',
+        question: 'The "Doctrine of Frustration" (Section 56) applies when:',
+        options: ['One party refuses to perform the contract.', 'Performance becomes impossible due to an external, unforeseen event.', 'There is a minor delay in performance.', 'The parties have a disagreement over the price.'],
+        correctAnswer: 1
+      },
+      {
+        id: 51,
+        topic: 'contract',
+        question: 'What is the meaning of the legal term Quantum Meruit?',
+        options: ['Something for something.', 'As much as earned.', 'Let the buyer beware.', 'An act of God.'],
+        correctAnswer: 1
+      },
+      {
+        id: 52,
+        topic: 'contract',
+        question: 'The measure of damages for breach of contract was famously established in:',
+        options: ['Hadley v. Baxendale.', 'Lalman v. Gauri Dutt.', 'Felthouse v. Bindley.', 'Derry v. Peek.'],
+        correctAnswer: 0
+      },
+      {
+        id: 53,
+        topic: 'contract',
+        question: 'Under the Specific Relief Act, 1963, a "Mandatory Injunction" is used to:',
+        options: ['Prevent a person from filing a lawsuit.', 'Compel the performance of certain acts to prevent a breach.', 'Stop a contract from being signed.', 'Cancel a minor\'s property rights.'],
+        correctAnswer: 1
+      },
+      {
+        id: 54,
+        topic: 'contract',
+        question: 'Section 6 of the Specific Relief Act provides a summary remedy for:',
+        options: ['Breach of a marriage promise.', 'Unlawful dispossession of immovable property.', 'Recovery of lost movable goods.', 'Fraudulent misrepresentation.'],
+        correctAnswer: 1
+      },
+      {
+        id: 55,
+        topic: 'contract',
         question: 'What is the essential element of a valid contract?',
         options: ['Offer and Acceptance', 'Consideration', 'Intention to create legal relations', 'All of the above'],
         correctAnswer: 3
       },
       {
-        id: 12,
+        id: 56,
         topic: 'contract',
         question: 'A contract entered into by a minor is:',
         options: ['Void', 'Voidable', 'Valid', 'Illegal'],
         correctAnswer: 0
       },
       {
-        id: 13,
+        id: 57,
         topic: 'contract',
         question: 'What is the doctrine of "Caveat Emptor"?',
         options: ['Let the buyer beware', 'Let the seller beware', 'Let both parties beware', 'None of the above'],
         correctAnswer: 0
       },
       {
-        id: 26,
+        id: 58,
         topic: 'contract',
         question: 'When the Communication of a proposal is complete',
         options: ['When it do not comes to the knowledge of the person to whom it is made', 'When it comes to the knowledge of the another person that some communication was made to the concerned person', 'When it comes to the knowledge of the person to whom it is not made', 'When it comes to the knowledge of the person to whom it is made'],
