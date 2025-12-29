@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+console.log('DEBUG ENV GEMINI_KEY:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
+console.log('DEBUG ENV PWD:', process.cwd());
 
 const app = express();
 const PORT = process.env.PORT || 5000;

@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const genAI = new GoogleGenerativeAI((process.env.GEMINI_API_KEY || '').trim());
 
 // System prompt for legal context
 const LEGAL_SYSTEM_PROMPT = `You are a knowledgeable Indian legal assistant specializing in Indian law, including the Constitution of India, Indian Penal Code (IPC), Bharatiya Nyaya Sanhita (BNS 2023), and landmark Supreme Court cases.
@@ -29,38 +29,42 @@ async function sendMessage(message, chatHistory = []) {
             throw new Error('GEMINI_API_KEY not configured in environment variables');
         }
 
-        // Get the model - trying gemini-1.5-pro
-        const model = genAI.getGenerativeModel({
-            model: 'gemini-1.5-pro',
-        });
+        // List of models to try in order
+        const modelsToTry = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'];
 
-        // Build conversation history
-        const history = chatHistory.map(msg => ({
-            role: msg.role === 'user' ? 'user' : 'model',
-            parts: [{ text: msg.content }]
-        }));
+        let lastError;
+        for (const modelName of modelsToTry) {
+            try {
+                console.log(`Trying Gemini model: ${modelName}`);
+                const model = genAI.getGenerativeModel({ model: modelName });
 
-        // Start chat with history
-        const chat = model.startChat({
-            history: [
-                {
-                    role: 'user',
-                    parts: [{ text: LEGAL_SYSTEM_PROMPT }]
-                },
-                {
-                    role: 'model',
-                    parts: [{ text: 'Understood. I am ready to assist with Indian legal queries, case law, and constitutional matters. How may I help you today?' }]
-                },
-                ...history
-            ],
-        });
+                // Build conversation history
+                const history = chatHistory.map(msg => ({
+                    role: msg.role === 'user' ? 'user' : 'model',
+                    parts: [{ text: msg.content }]
+                }));
 
-        // Send message and get response
-        const result = await chat.sendMessage(message);
-        const response = await result.response;
-        const text = response.text();
+                // Start chat with history
+                const chat = model.startChat({
+                    history: [
+                        { role: 'user', parts: [{ text: LEGAL_SYSTEM_PROMPT }] },
+                        { role: 'model', parts: [{ text: 'Understood. I am ready to assist with Indian legal queries, case law, and constitutional matters. How may I help you today?' }] },
+                        ...history
+                    ],
+                });
 
-        return text;
+                const result = await chat.sendMessage(message);
+                const response = await result.response;
+                return response.text();
+            } catch (error) {
+                console.error(`Model ${modelName} failed:`, error.message);
+                lastError = error;
+                // Continue to next model
+            }
+        }
+
+        // If all models fail, throw the last error
+        throw lastError;
     } catch (error) {
         console.error('Gemini API Error:', error);
         console.error('Error details:', error.message);

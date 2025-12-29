@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Gavel, Menu, X, BookOpen, MessageSquare, Award, User, LogOut } from 'lucide-react';
+import { Gavel, Menu, X, BookOpen, MessageSquare, Award, User, LogOut, Scale } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Layout = () => {
@@ -35,6 +35,7 @@ const Layout = () => {
         { path: '/', label: 'Home', icon: null },
         { path: '/quiz', label: 'Start Quiz', icon: null },
         { path: '/notes', label: 'Legal Notes', icon: BookOpen },
+        { path: '/legal-ai', label: 'BNS Bridge', icon: Scale },
         { path: '/leaderboard', label: 'Leaderboard', icon: Award },
         { path: '/feedback', label: 'Feedback', icon: MessageSquare },
     ];
@@ -60,7 +61,7 @@ const Layout = () => {
                             <Link to="/" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Home</Link>
                             <Link to="/quiz" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Quiz</Link>
                             <Link to="/notes" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Notes</Link>
-                            <Link to="/legal-ai" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Law AI</Link>
+                            <Link to="/legal-ai" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">BNS Bridge</Link>
                             <Link to="/leaderboard" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Rankings</Link>
                             <Link to="/feedback" className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-sm uppercase tracking-wide">Feedback</Link>
 
@@ -113,7 +114,7 @@ const Layout = () => {
                                 <Link to="/" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
                                 <Link to="/quiz" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
                                 <Link to="/notes" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Legal Notes</Link>
-                                <Link to="/legal-ai" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Law AI</Link>
+                                <Link to="/legal-ai" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>BNS Bridge</Link>
                                 <Link to="/leaderboard" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Leaderboard</Link>
                                 <Link to="/feedback" className="block px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200 transition-all font-medium" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
                                 {user ? (
